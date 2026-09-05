@@ -1,1 +1,474 @@
-# Gabrielraffystahl-bot.github.io
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Votre Nom — Photographe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1712;
+    --paper:#EFE8D8;
+    --paper-deep:#E4DBC6;
+    --gold:#B8862E;
+    --rust:#7C3A28;
+    --muted:#6E6656;
+    --line: rgba(27,23,18,0.14);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* Placeholder photo blocks -- REMPLACEZ ces <img> par vos propres photos.
+     Il suffit de changer l'attribut src="..." par le chemin de votre fichier
+     (ex: src="photos/vitrine-boulangerie.jpg") ou par une URL en ligne. */
+  .ph{
+    position:relative;
+    width:100%;
+    height:100%;
+    background:
+      linear-gradient(135deg, #D8CBA8 0%, #C9B98D 45%, #B8A374 100%);
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+    min-height:220px;
+  }
+  .ph::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(27,23,18,0.05) 0 2px, transparent 2px 14px);
+  }
+  .ph span{
+    position:relative;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--ink);
+    background:rgba(239,232,216,0.85);
+    padding:6px 10px;
+    margin:14px;
+  }
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 0;
+  }
+  .nav .logo{
+    font-family:'Newsreader', serif;
+    font-size:20px;
+    font-weight:500;
+  }
+  .nav ul{
+    list-style:none;
+    display:flex;
+    gap:34px;
+    font-size:14.5px;
+  }
+  .nav ul a{
+    position:relative;
+    padding-bottom:2px;
+  }
+  .nav ul a:hover{ color:var(--gold); }
+  .nav .cta{
+    border:1px solid var(--ink);
+    padding:9px 18px;
+    font-size:14px;
+  }
+  .nav .cta:hover{ background:var(--ink); color:var(--paper); }
+  .menu-btn{ display:none; background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink);}
+
+  /* Hero */
+  .hero{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    align-items:stretch;
+    min-height:640px;
+  }
+  .hero-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px 5vw 60px 0;
+  }
+  .hero-text .eyebrow{
+    color:var(--rust);
+    font-size:14px;
+    margin-bottom:22px;
+  }
+  .hero-text h1{
+    font-size:clamp(38px, 4.6vw, 62px);
+    line-height:1.08;
+    max-width:11ch;
+  }
+  .hero-text p{
+    margin-top:26px;
+    max-width:44ch;
+    color:var(--muted);
+    font-size:17px;
+  }
+  .hero-actions{
+    margin-top:38px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 26px;
+    font-size:15px;
+  }
+  .btn-primary:hover{ background:var(--gold); }
+  .btn-ghost{
+    padding:14px 4px;
+    font-size:15px;
+    border-bottom:1px solid var(--ink);
+  }
+  .btn-ghost:hover{ color:var(--gold); border-color:var(--gold); }
+  .hero-img{ min-height:340px; }
+
+  /* Section shell */
+  section{ padding:110px 0; }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:56px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:26px;
+  }
+  .section-head h2{ font-size:clamp(28px, 3vw, 38px); }
+  .section-head p{ color:var(--muted); max-width:36ch; font-size:15px; }
+
+  /* Services (for commerçants) */
+  .services{ background:var(--paper-deep); }
+  .service-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service{
+    background:var(--paper-deep);
+    padding:36px 30px;
+  }
+  .service .num{
+    font-family:'Newsreader', serif;
+    font-size:14px;
+    color:var(--rust);
+    margin-bottom:22px;
+  }
+  .service h3{ font-size:22px; margin-bottom:12px; }
+  .service p{ color:var(--muted); font-size:14.5px; }
+
+  /* Portfolio - editorial masonry-ish grid */
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    grid-auto-rows:150px;
+    gap:14px;
+  }
+  .portfolio-grid figure{ overflow:hidden; }
+  .g1{ grid-column:span 4; grid-row:span 3; }
+  .g2{ grid-column:span 2; grid-row:span 2; }
+  .g3{ grid-column:span 2; grid-row:span 3; }
+  .g4{ grid-column:span 2; grid-row:span 2; }
+  .g5{ grid-column:span 2; grid-row:span 2; }
+  .g6{ grid-column:span 3; grid-row:span 2; }
+  .g7{ grid-column:span 3; grid-row:span 2; }
+
+  /* Approche / pourquoi me choisir */
+  .approach{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .approach-img{ min-height:460px; }
+  .approach ol{
+    list-style:none;
+    counter-reset:step;
+  }
+  .approach li{
+    counter-increment:step;
+    padding:22px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:44px 1fr;
+    gap:18px;
+  }
+  .approach li:last-child{ border-bottom:1px solid var(--line); }
+  .approach li::before{
+    content:counter(step,decimal-leading-zero);
+    font-family:'Newsreader', serif;
+    color:var(--rust);
+    font-size:15px;
+  }
+  .approach li h3{ font-size:19px; margin-bottom:6px; }
+  .approach li p{ color:var(--muted); font-size:14.5px; }
+
+  /* Contact */
+  .contact{ background:var(--ink); color:var(--paper); }
+  .contact .section-head{ border-color:rgba(239,232,216,0.18); }
+  .contact .section-head p{ color:rgba(239,232,216,0.65); }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+  }
+  .contact-info p{ color:rgba(239,232,216,0.75); margin-bottom:26px; max-width:38ch; }
+  .contact-detail{ margin-bottom:20px; }
+  .contact-detail .label{ font-size:12.5px; color:var(--gold); margin-bottom:4px; letter-spacing:0.02em;}
+  .contact-detail .value{ font-size:17px; }
+  form{ display:flex; flex-direction:column; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{ font-size:13px; color:rgba(239,232,216,0.6); }
+  .field input, .field textarea{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid rgba(239,232,216,0.3);
+    color:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15px;
+    padding:10px 0;
+  }
+  .field input:focus, .field textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+  }
+  .field textarea{ resize:vertical; min-height:80px; }
+  .submit{
+    align-self:flex-start;
+    margin-top:8px;
+    background:var(--paper);
+    color:var(--ink);
+    padding:14px 28px;
+    font-size:15px;
+    border:none;
+    cursor:pointer;
+    font-family:'IBM Plex Sans', sans-serif;
+  }
+  .submit:hover{ background:var(--gold); color:var(--ink); }
+
+  footer{
+    background:var(--ink);
+    color:rgba(239,232,216,0.55);
+    padding:26px 0 34px;
+    font-size:13px;
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid rgba(239,232,216,0.12);
+  }
+
+  @media (max-width: 860px){
+    .nav ul, .nav .cta{ display:none; }
+    .menu-btn{ display:block; }
+    .hero{ grid-template-columns:1fr; min-height:auto; }
+    .hero-text{ padding:50px 0 40px; order:2; }
+    .hero-img{ order:1; min-height:320px; }
+    section{ padding:70px 0; }
+    .service-list{ grid-template-columns:1fr; }
+    .portfolio-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:130px; }
+    .g1,.g2,.g3,.g4,.g5,.g6,.g7{ grid-column:span 2; grid-row:span 2; }
+    .approach{ grid-template-columns:1fr; gap:40px; }
+    .approach-img{ min-height:280px; }
+    .contact-grid{ grid-template-columns:1fr; gap:44px; }
+    footer{ flex-direction:column; gap:6px; }
+    .wrap{ padding:0 20px; }
+  }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Votre Nom</div>
+    <ul>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approche">Approche</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="cta" href="#contact">Demander un devis</a>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section class="hero wrap" style="padding-top:0; padding-bottom:0;">
+  <div class="hero-text">
+    <div class="eyebrow">Photographe — basé à [Votre ville]</div>
+    <h1>Des photos qui donnent envie d'entrer.</h1>
+    <p>Je réalise des photos de vitrine, de produits et d'équipe pour les commerces locaux — pour un site, une carte Google, ou vos réseaux sociaux.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#portfolio">Voir mon travail</a>
+      <a class="btn-ghost" href="#contact">Prendre contact</a>
+    </div>
+  </div>
+  <!-- Photo hero : remplacez ce bloc par <img src="photos/hero.jpg" alt="..."> -->
+  <div class="hero-img ph"><span>Photo — remplacer par une image forte de votre travail</span></div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Ce que je propose aux commerçants</h2>
+      <p>Des formules pensées pour valoriser une boutique, un restaurant ou un artisan.</p>
+    </div>
+    <div class="service-list">
+      <div class="service">
+        <div class="num">01</div>
+        <h3>Photos de vitrine</h3>
+        <p>Façade, agencement, ambiance — pour donner envie de pousser la porte.</p>
+      </div>
+      <div class="service">
+        <div class="num">02</div>
+        <h3>Photos produits</h3>
+        <p>Mise en valeur de vos articles ou plats pour votre site et vos fiches Google / réseaux.</p>
+      </div>
+      <div class="service">
+        <div class="num">03</div>
+        <h3>Portraits d'équipe</h3>
+        <p>Vous et vos employés, en situation — pour humaniser votre communication.</p>
+      </div>
+      <div class="service">
+        <div class="num">04</div>
+        <h3>Reportage du quotidien</h3>
+        <p>Une série de photos naturelles pour alimenter vos réseaux sociaux sur plusieurs semaines.</p>
+      </div>
+      <div class="service">
+        <div class="num">05</div>
+        <h3>Séance événement</h3>
+        <p>Ouverture, lancement de collection, soirée privée — couverture complète.</p>
+      </div>
+      <div class="service">
+        <div class="num">06</div>
+        <h3>Formule sur mesure</h3>
+        <p>Un besoin spécifique ? On construit ensemble une prestation adaptée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Portfolio</h2>
+      <p>Une sélection de mes réalisations récentes.</p>
+    </div>
+    <!--
+      Grille de portfolio : chaque <figure class="ph"> est un emplacement.
+      Pour insérer une photo, remplacez le contenu par :
+      <figure><img src="photos/votre-photo.jpg" alt="Description" style="width:100%;height:100%;object-fit:cover;"></figure>
+    -->
+    <div class="portfolio-grid">
+      <figure class="ph g1"><span>Photo 1</span></figure>
+      <figure class="ph g2"><span>Photo 2</span></figure>
+      <figure class="ph g3"><span>Photo 3</span></figure>
+      <figure class="ph g4"><span>Photo 4</span></figure>
+      <figure class="ph g5"><span>Photo 5</span></figure>
+      <figure class="ph g6"><span>Photo 6</span></figure>
+      <figure class="ph g7"><span>Photo 7</span></figure>
+    </div>
+  </div>
+</section>
+
+<section class="approach" id="approche" style="display:grid;">
+  <div class="wrap" style="display:contents;">
+  </div>
+</section>
+
+<section id="approche2" style="padding-top:0;">
+  <div class="wrap approach">
+    <div class="approach-img ph"><span>Photo — vous en séance, ou votre matériel</span></div>
+    <div>
+      <div class="section-head" style="border:none; margin-bottom:30px; padding-bottom:0;">
+        <h2>Comment ça se passe</h2>
+      </div>
+      <ol class="approach">
+        <li><h3>Un échange rapide</h3><p>On discute de votre commerce, de vos besoins et du rendu souhaité — par téléphone ou sur place.</p></li>
+        <li><h3>La séance photo</h3><p>Je me déplace dans votre commerce, aux horaires qui vous arrangent, sans perturber votre activité.</p></li>
+        <li><h3>Sélection et retouche</h3><p>Je vous transmets une sélection retouchée, prête à l'emploi pour vos supports.</p></li>
+        <li><h3>Livraison</h3><p>Vous recevez vos photos en haute définition, adaptées au web et à l'impression.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Discutons de votre projet</h2>
+      <p>Une question, un devis, une disponibilité — je réponds rapidement.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Vous tenez un commerce et souhaitez des photos qui reflètent vraiment ce que vous proposez ? Parlons-en.</p>
+        <div class="contact-detail">
+          <div class="label">Email</div>
+          <div class="value">votre.email@exemple.com</div>
+        </div>
+        <div class="contact-detail">
+          <div class="label">Téléphone</div>
+          <div class="value">06 00 00 00 00</div>
+        </div>
+        <div class="contact-detail">
+          <div class="label">Zone d'intervention</div>
+          <div class="value">[Votre ville] et alentours</div>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Formulaire de démonstration — à connecter à votre email.');">
+        <div class="field">
+          <label for="nom">Nom du commerce</label>
+          <input id="nom" type="text" required>
+        </div>
+        <div class="field">
+          <label for="email">Votre email</label>
+          <input id="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="msg">Votre besoin</label>
+          <textarea id="msg" required></textarea>
+        </div>
+        <button class="submit" type="submit">Envoyer la demande</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div>© 2026 Votre Nom — Photographe</div>
+  <div>Site créé pour présenter mes services aux commerçants locaux</div>
+</footer>
+
+</body>
+</html>
